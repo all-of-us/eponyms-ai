@@ -89,7 +89,7 @@ def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_
     with output_path.open('a+') as f:
         # w = csv.DictWriter(f, ["disease", "openai_response", "gemini_response", "claude_response"])
         # w.writeheader()
-        for row in eponyms_apos_df[5600:].itertuples():
+        for row in eponyms_apos_df.itertuples():
 
             openai_response = oai_client.chat.completions.create(
                 model="gpt-4o-mini",
