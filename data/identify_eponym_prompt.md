@@ -10,6 +10,8 @@ Here is the concept name you need to analyze:
 {concept_name}
 </concept_name>
 
+-----
+
 Instructions:
 1. Carefully examine each word in the concept name.
 2. Determine if any word is an eponym (a term directly named after a person).
