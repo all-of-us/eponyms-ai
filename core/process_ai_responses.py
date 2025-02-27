@@ -1,8 +1,10 @@
 import json
 import pandas as pd
 import re
+import argparse
 from collections import defaultdict
 from typing import Dict, List, Optional
+from pathlib import Path
 
 from resources.constants import data_path
 
@@ -16,16 +18,16 @@ def extract_final_answer(response: Optional[str]) -> Optional[str]:
         return None
 
     # Extract text between <final_answer> tags
-    match = re.search(r'<final_answer>(.*?)</final_answer>', response, re.DOTALL)
+    match = re.search(r'<final_answer>(.*)', response, re.DOTALL)
     if not match:
         return None
 
     final_answer = match.group(1).strip()
 
     # Check if the answer contains Yes or No
-    if "Yes." in final_answer:
+    if "Yes" in final_answer:
         return "Yes"
-    elif "No." in final_answer:
+    elif "No" in final_answer:
         return "No"
     else:
         return None
@@ -54,31 +56,44 @@ def calculate_completeness_score(entry: Dict) -> int:
     if extract_final_answer(entry['gemini_response']):
         score += 1
 
-    # Check Presidio response
-    if entry['presidio_response']:
-        presidio_entities = json.loads(entry['presidio_response'])
-        if presidio_entities:
-            score += 1
-
     return score
 
 
-def process_jsonl_files(file_pattern):
+def process_jsonl_files(input_dir, output_path, batch_type=None, file_prefix="minimal"):
     """
     Process all JSONL files matching the pattern and extract relevant information.
     Handles duplicates by keeping the most complete version of each entry.
+
+    Args:
+        input_dir: Directory containing the JSONL files
+        output_path: Path to save the output CSV
+        batch_type: Type of batch processing ('openai', 'claude', or None for regular)
+        file_prefix: Prefix for input files to process
     """
+    input_path = Path(input_dir)
+
     # Use dictionary to track entries by disease name
     entries_by_disease = defaultdict(list)
-    missing_gemini = []
 
     # First pass: collect all entries grouped by disease
-    for filename in file_pattern.glob("minimal_desc_out*"):
+    for filename in input_path.glob(f"{file_prefix}*"):
         with open(filename, 'r') as f:
             for line in f:
                 entry = json.loads(line.strip())
-                disease = entry['disease']
-                entries_by_disease[disease].append(entry)
+                if batch_type == 'openai':
+                    custom_id = entry['custom_id']
+                    content = entry['response']['body']['choices'][0]['message']['content']
+                    entries_by_disease[custom_id].append(content)
+                elif batch_type == 'claude':
+                    custom_id = entry['custom_id']
+                    if 'result' in entry:
+                        content = entry['result']['message']['content'][0]['text']
+                    else:
+                        print(f"Unexpected entry format: {line}")
+                    entries_by_disease[custom_id].append(content)
+                else:
+                    disease = entry['disease']
+                    entries_by_disease[disease].append(entry)
 
     # Process entries, handling duplicates
     data = []
@@ -90,10 +105,6 @@ def process_jsonl_files(file_pattern):
             most_complete_entry = max(entries, key=calculate_completeness_score)
         else:
             most_complete_entry = entries[0]
-
-        # Check for missing Gemini response in the selected entry
-        if not most_complete_entry['gemini_response']:
-            missing_gemini.append(disease)
 
         # Process Presidio response
         presidio_entities = json.loads(most_complete_entry['presidio_response'])
@@ -117,33 +128,49 @@ def process_jsonl_files(file_pattern):
     df = pd.DataFrame(data)
 
     # Save the main results
-    df.to_csv(data_path / 'eponyms_output' / 'processed_responses_1.csv', index=False)
-
-    # Save missing Gemini responses
-    if missing_gemini:
-        with open(data_path / 'eponyms_output' / 'missing_gemini_responses.txt', 'w') as f:
-            for disease in missing_gemini:
-                f.write(f"{disease}\n")
-        print(f"Found {len(missing_gemini)} missing Gemini responses")
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output_path, index=False)
 
     return df
 
 
+def main():
+    parser = argparse.ArgumentParser(description='Process AI model responses from JSONL files.')
+
+    parser.add_argument('-i','--input', help='Directory containing the input JSONL files')
+    parser.add_argument('-o','--output', help='Path to save the output CSV file')
+    parser.add_argument('-b','--batch-type', choices=['openai', 'claude', 'none'], help='Type of batch processing (openai, claude, or none)')
+    parser.add_argument('-p','--prefix', help='Prefix for input files to process')
+    parser.add_argument('-s','--stats', action='store_true', help='Print summary statistics after processing')
+
+    args = parser.parse_args()
+
+    # Convert 'none' to None for batch_type
+    batch_type = None if args.batch_type == 'none' else args.batch_type
+    # Process files
+    df = process_jsonl_files(
+        input_dir=data_path / 'eponyms_input' / args.input,
+        output_path=data_path / 'eponyms_output' / args.output,
+        batch_type=batch_type,
+        file_prefix=args.prefix
+    )
+
+    # Print summary statistics if requested
+    if args.stats:
+        print("\nSummary Statistics:")
+        print(f"Total processed entries: {len(df)}")
+        print("\nResponse distributions:")
+        for model in ['openai', 'claude', 'gemini']:
+            print(f"\n{model.capitalize()} responses:")
+            print(df[f'{model}_answer'].value_counts(dropna=False))
+
+        # Print duplicate handling statistics
+        print("\nDuplicate handling statistics:")
+        initial_diseases = df['disease'].value_counts()
+        print(f"Number of unique diseases: {len(initial_diseases)}")
+        print(f"Number of diseases with multiple entries: {sum(initial_diseases > 1)}")
+
+
 if __name__ == "__main__":
-    # Process all matching files in the data directory
-    file_pattern = data_path / 'eponyms_output'
-    df = process_jsonl_files(file_pattern)
-
-    # Print summary statistics
-    print("\nSummary Statistics:")
-    print(f"Total processed entries: {len(df)}")
-    print("\nResponse distributions:")
-    for model in ['openai', 'claude', 'gemini']:
-        print(f"\n{model.capitalize()} responses:")
-        print(df[f'{model}_answer'].value_counts(dropna=False))
-
-    # Print duplicate handling statistics
-    print("\nDuplicate handling statistics:")
-    initial_diseases = df['disease'].value_counts()
-    print(f"Number of unique diseases: {len(initial_diseases)}")
-    print(f"Number of diseases with multiple entries: {sum(initial_diseases > 1)}")
+    main()
