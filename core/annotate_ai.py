@@ -2,11 +2,19 @@
 
 import json
 import logging
+import re
+import time
 from pathlib import Path
 import argparse
 
 import pandas as pd
+from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
+from anthropic.types.messages.batch_create_params import Request
 from google.genai import types
+from google.genai.types import CreateBatchJobConfig, JobState, HttpOptions
+from google.cloud import aiplatform_v1beta1
+from google.protobuf import json_format
+
 from openai import OpenAI, AzureOpenAI
 from anthropic import Anthropic
 # import google.generativeai as genai
@@ -40,7 +48,91 @@ def read_guideline(guideline_path):
     return guideline_path.read_text()
 
 
-def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_path, gemini_sa_path, gemini_key_path, anthropic_key_path):
+def run_openai_batch_request(oai_client, df, system_prompt, user_prompt, concept_prompt):
+    with open(data_path / "batch" / "openai_batch_input.jsonl", "w+") as f:
+        for row in df.itertuples():
+            custom_string = re.sub(r'[^a-zA-Z0-9_-]', '', row.tokenized_concept_name.strip())
+            request = {"custom_id": f"{str(row.Index)}{custom_string}"[:63],
+                       "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gpt-4o-mini",
+                         "messages": [{"role": "system",
+                                       "content": system_prompt},
+                                      {"role": "user",
+                                       "content": user_prompt},
+                                      {"role": "user",
+                                       "content": concept_prompt.format(concept_name=row.concept_name)}],
+                         "max_tokens": 1000}
+                }
+            f.write(json.dumps(request) + '\n')
+    batch_input_file = oai_client.files.create(
+        file=open(data_path / "batch" / "openai_batch_input.jsonl", "rb"),
+        purpose="batch"
+    )
+    batch_input_file_id = batch_input_file.id
+    oai_client.batches.create(
+        input_file_id=batch_input_file_id,
+        endpoint="/v1/chat/completions",
+        completion_window="24h",
+        metadata={
+            "description": "nightly eval job"
+        }
+    )
+
+
+def run_gemini_batch_request(gemini_client, df, bucket_id, system_prompt, user_prompt, concept_prompt):
+    with open(data_path / "batch" / "gemini_batch_input.jsonl", "w+") as f:
+        for row in df.itertuples():
+            request = {"request": {"contents":
+              [{"role": "system", "parts": [{"text": system_prompt},{"text": user_prompt}]},
+               {"role": "user", "parts": [{"text": concept_prompt.format(concept_name=row.concept_name)}]}
+              ]}
+            }
+            f.write(json.dumps(request) + '\n')
+
+    storage_uri = f"gs://{bucket_id}/input/gemini_batch_input.jsonl"
+    output_uri = f"gs://{bucket_id}/output/gemini_batch_output.jsonl"
+
+    job = gemini_client.batches.create(
+        model="gemini-2.0-flash-001",
+        src=storage_uri,
+        config=CreateBatchJobConfig(dest=output_uri),
+    )
+
+
+def run_claude_batch_request(claude_client, df, system_prompt, user_prompt, concept_prompt):
+    requests = []
+    for row in df.itertuples():
+        requests.append(
+            Request(
+                custom_id=f"{str(row.Index)}{re.sub(r'[^a-zA-Z0-9_-]', '', row.tokenized_concept_name.strip())}"[:63],
+                params=MessageCreateParamsNonStreaming(
+                    model="claude-3-5-haiku-20241022",
+                    max_tokens=512,
+                    system=[
+                        {
+                            "type": "text",
+                            "text": system_prompt,
+                        },
+                        {
+                            "type": "text",
+                            "text": user_prompt,
+                            "cache_control": {"type": "ephemeral"}
+                        }
+                    ],
+                    messages=[{
+                        "role": "user",
+                        "content": concept_prompt.format(concept_name=row.concept_name)
+                    }]
+                )
+            )
+        )
+
+    message_batch = claude_client.messages.batches.create(
+        requests=requests
+    )
+
+
+def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_path,
+         gemini_sa_path, gemini_key_path, anthropic_key_path, bucket_id):
     """
     Main function
     :param input_path:
@@ -58,7 +150,7 @@ def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_
     # )
 
     guideline = read_guideline(data_path / "identify_eponym_prompt.md")
-    system_prompt, user_prompt = guideline.split('-----')
+    system_prompt, concept_prompt, user_prompt = guideline.split('-----')
 
     oai_client = OpenAI(api_key=file_contents(openai_key_path))
 
@@ -83,19 +175,25 @@ def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_
     eponyms_apos_df = pd.read_csv(input_path,
                                   delimiter=',',
                                   header=0,
-                                  names=DEFAULT_COLS,
+                                  names=ANNOTATED_COLS,
                                   dtype=str)
+
+    run_openai_batch_request(oai_client, eponyms_apos_df, system_prompt, user_prompt, concept_prompt)
+    run_gemini_batch_request(gemini_client, eponyms_apos_df, bucket_id, system_prompt, user_prompt, concept_prompt)
+    run_claude_batch_request(claude_client, eponyms_apos_df, system_prompt, user_prompt, concept_prompt)
 
     with output_path.open('a+') as f:
         # w = csv.DictWriter(f, ["disease", "openai_response", "gemini_response", "claude_response"])
         # w.writeheader()
         for row in eponyms_apos_df.itertuples():
+            # time.sleep(0.2)
 
             openai_response = oai_client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt.format(concept_name=row.concept_name)}
+                    {"role": "user", "content": user_prompt},
+                    {"role": "user", "content": concept_prompt.format(concept_name=row.concept_name)},
                 ]
             )
 
@@ -114,7 +212,7 @@ def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_
                 # )
                 gemini_response = gemini_client.models.generate_content(
                     model='gemini-2.0-flash-thinking-exp',
-                    contents=user_prompt.format(concept_name=row.concept_name),
+                    contents=concept_prompt.format(concept_name=row.concept_name) + "\n" + user_prompt,
                     config=types.GenerateContentConfig(
                         thinking_config=types.ThinkingConfig(include_thoughts=False),
                         system_instruction=system_prompt,
@@ -123,7 +221,8 @@ def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_
                 ).text
                 # gemini_response = ''
             except Exception as e:
-                logging.log(logging.INFO, f"500 Error while fetching response from Gemini for {row.concept_name}")
+                logging.log(logging.INFO, e)
+                # time.sleep(1)
                 gemini_response = ''
 
             logging.log(logging.INFO, f"Fetching response from Claude for {row.concept_name}")
@@ -131,23 +230,27 @@ def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_
                 max_tokens=512,
                 system=system_prompt,
                 messages=[
-                    {
-                        "role": "user",
-                        "content": user_prompt.format(concept_name=row.concept_name)
-                    }
+                    {"role": "user", "content": concept_prompt.format(concept_name=row.concept_name)},
+                    {"role": "user", "content": user_prompt}
                 ],
                 model="claude-3-5-haiku-latest",
             )
+            claude_message = json.loads(claude_message.model_dump_json())['content'][0]['text']
             # claude_message = ''
 
             presidio_results = analyzer.analyze(text=row.concept_name, entities=["PERSON"], language='en')
+
+            presidio_names_scores = [json.dumps({"name": row.concept_name[r.start:r.end+1],"score": r.score})
+                                     for r in presidio_results if r.entity_type == "PERSON"]
+
+            presidio_response = f'[{",".join(presidio_names_scores)}]'
 
             output_dict = {
                 "disease": row.concept_name,
                 "openai_response": openai_message,
                 "gemini_response": gemini_response,
-                "claude_response": json.loads(claude_message.model_dump_json())['content'][0]['text'],
-                "presidio_response": f'[{",".join([json.dumps({"name": row.concept_name[r.start:r.end+1],"score": r.score}) for r in presidio_results if r.entity_type == "PERSON"])}]'
+                "claude_response": claude_message,
+                "presidio_response": presidio_response
             }
 
             f.write(json.dumps(output_dict) + '\n')
@@ -168,6 +271,7 @@ def get_parser():
     parser.add_argument("-g", "--gemini_sa_path", type=Path, help="The path to the gemini SA json file")
     parser.add_argument("-m", "--gemini_key_path", type=Path, help="The path to the gemini key file")
     parser.add_argument("-c", "--anthropic_key_path", type=Path, help="The path to the anthropic key file")
+    parser.add_argument("-b", "--bucket_id", type=Path, help="The google bucket ID")
 
     return parser
 
@@ -182,4 +286,4 @@ if __name__ == "__main__":
     input_path = data_path / "eponyms_input" / args.input_file
     output_path = data_path / "eponyms_output" / args.output_file
     main(input_path, output_path, args.azure_endpoint_path, args.azure_key_path, args.openai_key_path,
-         args.gemini_sa_path, args.gemini_key_path, args.anthropic_key_path)
+         args.gemini_sa_path, args.gemini_key_path, args.anthropic_key_path, args.bucket_id)
