@@ -33,6 +33,51 @@ def extract_final_answer(response: Optional[str]) -> Optional[str]:
         return None
 
 
+def extract_eponym(text):
+    """
+    Extract the eponym (if any) from a numbered list analysis of medical terms.
+
+    Args:
+        text (str): Text containing the numbered list analysis.
+
+    Returns:
+        str or None: The identified eponym, or None if no eponym is found.
+    """
+    # Check if there's a conclusion statement about no eponyms
+    if "no eponyms" in text.lower():
+        return None
+
+    eponyms = []
+
+    # Regular expression to find numbered items
+    pattern = r'\d+\.\s+(.*?)(?=\n\d+\.|\n\nUpon|\Z)'
+
+    # Find all items in the numbered list
+    items = re.findall(pattern, text, re.DOTALL)
+
+    # Process each item to look for eponym mentions
+    for item in items:
+        # Look for phrases that indicate an eponym
+        if "derived from" in item.lower() and "person's name" in item.lower() and "not" not in item.lower():
+            # Extract the term being described (usually at the beginning)
+            term_match = re.match(r'([^:-]+)[:-]', item)
+            if term_match:
+                return term_match.group(1).strip()
+
+        # Alternative pattern: directly states it's an eponym
+        if "eponym" in item.lower() and "not" not in item.lower():
+            term_match = re.match(r'([^:-]+)[:-]', item)
+            if term_match:
+                return term_match.group(1).strip()
+
+    # Check if there's a positive identification elsewhere in the text
+    positive_match = re.search(r'(\w+) is (\w+) eponym', text)
+    if positive_match:
+        return positive_match.group(1).strip()
+
+    return None
+
+
 def calculate_completeness_score(entry: Dict) -> int:
     """
     Calculate a completeness score for an entry based on filled fields.
@@ -41,19 +86,19 @@ def calculate_completeness_score(entry: Dict) -> int:
     score = 0
 
     # Check AI responses
-    if entry['openai_response']:
+    if entry.get('openai_response'):
         score += 1
-    if entry['claude_response']:
+    if entry.get('claude_response'):
         score += 1
-    if entry['gemini_response']:
+    if entry.get('gemini_response'):
         score += 1
 
     # Check extracted answers
-    if extract_final_answer(entry['openai_response']):
+    if extract_final_answer(entry.get('openai_response')):
         score += 1
-    if extract_final_answer(entry['claude_response']):
+    if extract_final_answer(entry.get('claude_response')):
         score += 1
-    if extract_final_answer(entry['gemini_response']):
+    if extract_final_answer(entry.get('gemini_response')):
         score += 1
 
     return score
@@ -76,7 +121,8 @@ def process_jsonl_files(input_dir, output_path, batch_type=None, file_prefix="mi
     entries_by_disease = defaultdict(list)
 
     # First pass: collect all entries grouped by disease
-    for filename in input_path.glob(f"{file_prefix}*"):
+    for filename in input_path.glob(f"{file_prefix}*.jsonl"):
+        print(f"Processing {filename}")
         with open(filename, 'r') as f:
             for line in f:
                 entry = json.loads(line.strip())
@@ -118,8 +164,11 @@ def process_jsonl_files(input_dir, output_path, batch_type=None, file_prefix="mi
         data.append({
             'disease': disease,
             'openai_answer': extract_final_answer(most_complete_entry['openai_response']),
+            'openai_eponym': extract_eponym(most_complete_entry['openai_response']),
             'claude_answer': extract_final_answer(most_complete_entry['claude_response']),
+            'claude_eponym': extract_eponym(most_complete_entry['claude_response']),
             'gemini_answer': extract_final_answer(most_complete_entry['gemini_response']),
+            'gemini_eponym': extract_eponym(most_complete_entry['gemini_response']),
             'presidio_entities': ';'.join(presidio_names),
             'presidio_scores': ';'.join(presidio_scores)
         })
