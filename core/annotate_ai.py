@@ -19,40 +19,22 @@ from openai import OpenAI, AzureOpenAI
 from anthropic import Anthropic
 # import google.generativeai as genai
 from google import genai
-from google.cloud import aiplatform
+# from google.cloud import aiplatform
 from google.oauth2 import service_account
 import vertexai
 from vertexai.generative_models import GenerationConfig
 from vertexai.preview.generative_models import GenerativeModel
 from presidio_analyzer import AnalyzerEngine
 
+from resources.annotate_ai_utils import file_contents, read_guideline
 from resources.constants import data_path, ANNOTATED_COLS, DEFAULT_COLS
 
 
-def file_contents(path):
-    """
-    Get the OpenAI API key from the given path
-    :param path:
-    :return:
-    """
-    key_path = Path(path).expanduser()
-    return key_path.read_text().strip()
-
-
-def read_guideline(guideline_path):
-    """
-    Read the guideline from the given path
-    :param guideline_path:
-    :return:
-    """
-    return guideline_path.read_text()
-
-
 def run_openai_batch_request(oai_client, df, system_prompt, user_prompt, concept_prompt):
-    with open(data_path / "batch" / "openai_batch_input.jsonl", "w+") as f:
+    with open(data_path / "batch" / "openai_batch_input_all_v2.jsonl", "w+") as f:
         for row in df.itertuples():
-            custom_string = re.sub(r'[^a-zA-Z0-9_-]', '', row.tokenized_concept_name.strip())
-            request = {"custom_id": f"{str(row.Index)}{custom_string}"[:63],
+            custom_string = str(row.concept_id)
+            request = {"custom_id": custom_string,
                        "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gpt-4o-mini",
                          "messages": [{"role": "system",
                                        "content": system_prompt},
@@ -64,7 +46,7 @@ def run_openai_batch_request(oai_client, df, system_prompt, user_prompt, concept
                 }
             f.write(json.dumps(request) + '\n')
     batch_input_file = oai_client.files.create(
-        file=open(data_path / "batch" / "openai_batch_input.jsonl", "rb"),
+        file=open(data_path / "batch" / "openai_batch_input_all_v2.jsonl", "rb"),
         purpose="batch"
     )
     batch_input_file_id = batch_input_file.id
@@ -79,17 +61,18 @@ def run_openai_batch_request(oai_client, df, system_prompt, user_prompt, concept
 
 
 def run_gemini_batch_request(gemini_client, df, bucket_id, system_prompt, user_prompt, concept_prompt):
-    with open(data_path / "batch" / "gemini_batch_input.jsonl", "w+") as f:
+    with open(data_path / "batch" / "gemini_batch_input_all_v2.jsonl", "w+") as f:
         for row in df.itertuples():
             request = {"request": {"contents":
-              [{"role": "system", "parts": [{"text": system_prompt},{"text": user_prompt}]},
-               {"role": "user", "parts": [{"text": concept_prompt.format(concept_name=row.concept_name)}]}
+              [{"role": "user", "parts": [{"text": system_prompt + "\n\n" + 
+                                           user_prompt + "\n\n" + 
+                                           concept_prompt.format(concept_name=row.concept_name)}]}
               ]}
             }
             f.write(json.dumps(request) + '\n')
 
-    storage_uri = f"gs://{bucket_id}/input/gemini_batch_input.jsonl"
-    output_uri = f"gs://{bucket_id}/output/gemini_batch_output.jsonl"
+    storage_uri = f"gs://{bucket_id}/input/gemini_batch_input_all_v2.jsonl"
+    output_uri = f"gs://{bucket_id}/output/gemini_batch_output_all_v2.jsonl"
 
     job = gemini_client.batches.create(
         model="gemini-2.0-flash-001",
@@ -103,7 +86,7 @@ def run_claude_batch_request(claude_client, df, system_prompt, user_prompt, conc
     for row in df.itertuples():
         requests.append(
             Request(
-                custom_id=f"{str(row.Index)}{re.sub(r'[^a-zA-Z0-9_-]', '', row.tokenized_concept_name.strip())}"[:63],
+                custom_id=f"{str(row.concept_id)}",
                 params=MessageCreateParamsNonStreaming(
                     model="claude-3-5-haiku-20241022",
                     max_tokens=512,
@@ -175,12 +158,12 @@ def main(input_path, output_path, endpoint_path, azure_api_key_path, openai_key_
     eponyms_apos_df = pd.read_csv(input_path,
                                   delimiter=',',
                                   header=0,
-                                  names=ANNOTATED_COLS,
+                                  names=["concept_name", "concept_id"],
                                   dtype=str)
 
     run_openai_batch_request(oai_client, eponyms_apos_df, system_prompt, user_prompt, concept_prompt)
-    run_gemini_batch_request(gemini_client, eponyms_apos_df, bucket_id, system_prompt, user_prompt, concept_prompt)
     run_claude_batch_request(claude_client, eponyms_apos_df, system_prompt, user_prompt, concept_prompt)
+    run_gemini_batch_request(gemini_client, eponyms_apos_df, bucket_id, system_prompt, user_prompt, concept_prompt)
 
     with output_path.open('a+') as f:
         # w = csv.DictWriter(f, ["disease", "openai_response", "gemini_response", "claude_response"])
