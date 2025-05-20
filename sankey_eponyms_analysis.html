@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sankey Diagram</title>
+    <title>Sankey Diagram with Counts</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <style>
         .container {
@@ -42,7 +42,18 @@
         }
 
         .node text {
-            font-size: 12px;
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .count-label {
+            font-weight: bold;
+            fill: #333;
+        }
+
+        .link-label {
+            font-size: 16px;
+            fill: #333;
             pointer-events: none;
         }
 
@@ -54,7 +65,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Flow Visualization</h1>
+        <h1>Flow Visualization with Counts</h1>
         <div id="chart"></div>
         <div id="controls" class="controls"></div>
     </div>
@@ -69,7 +80,7 @@
                 { name: "Hyphen", color: "#007FFF" },
                 { name: "Descriptor", color: "#66B2FF" },
                 { name: "Crowd-sourced", color: "#2F5B7C" },
-                { name: "AI annotation", color: "#004C99" },
+                { name: "Human annotation", color: "#004C99" },
                 { name: "AI annotation", color: "#007FFF" },
                 { name: "AI annotation", color: "#66B2FF" },
                 { name: "Final", color: "#0066CC" }
@@ -148,6 +159,19 @@
                 .append("title")
                 .text(d => `${d.source.name} → ${d.target.name}: ${d.value}`);
 
+            // Add link value labels
+            svg.append("g")
+                .selectAll("text")
+                .data(sankeyData.links)
+                .enter()
+                .append("text")
+                .attr("class", "link-label")
+                .attr("x", d => (d.source.x1 + d.target.x0) / 2)
+                .attr("y", d => (d.y0 + d.y1) / 2 - 2)
+                .attr("text-anchor", "middle")
+                .attr("dy", "0.35em")
+                .text(d => d.value);
+
             // Draw nodes
             const node = svg.append("g")
                 .selectAll(".node")
@@ -164,6 +188,7 @@
                 .append("title")
                 .text(d => d.name);
 
+            // Node name labels
             node.append("text")
                 .attr("x", d => d.x1 - d.x0 + 6)
                 .attr("y", d => (d.y1 - d.y0) / 2)
