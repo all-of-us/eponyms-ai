@@ -1,3 +1,4 @@
+import csv
 import json
 import pandas as pd
 import re
@@ -6,7 +7,6 @@ from collections import defaultdict
 from typing import Dict, List, Optional
 from pathlib import Path
 
-from resources.constants import data_path
 
 
 def extract_final_answer(response: Optional[str]) -> Optional[str]:
@@ -16,6 +16,9 @@ def extract_final_answer(response: Optional[str]) -> Optional[str]:
     """
     if not response:
         return None
+
+    # Exclude thinking tokens
+    response = re.sub(r'<think>(.*)</think>', '', response, re.DOTALL)
 
     # Extract text between <final_answer> tags
     match = re.search(r'<final_answer>(.*)', response, re.DOTALL)
@@ -44,8 +47,11 @@ def extract_eponym(text):
         str or None: The identified eponym, or None if no eponym is found.
     """
     # Check if there's a conclusion statement about no eponyms
-    if "no eponyms" in text.lower():
+    if not text or "no eponyms" in text.lower():
         return None
+    
+    # Exclude thinking tokens
+    text = re.sub(r'<think>(.*)</think>', '', text, re.DOTALL)
 
     eponyms = []
 
@@ -62,20 +68,20 @@ def extract_eponym(text):
             # Extract the term being described (usually at the beginning)
             term_match = re.match(r'([^:-]+)[:-]', item)
             if term_match:
-                return term_match.group(1).strip()
+                eponyms.append(term_match.group(1).strip())
 
         # Alternative pattern: directly states it's an eponym
         if "eponym" in item.lower() and "not" not in item.lower():
             term_match = re.match(r'([^:-]+)[:-]', item)
             if term_match:
-                return term_match.group(1).strip()
+                eponyms.append(term_match.group(1).strip())
 
     # Check if there's a positive identification elsewhere in the text
     positive_match = re.search(r'(\w+) is (\w+) eponym', text)
     if positive_match:
-        return positive_match.group(1).strip()
+        eponyms.append(positive_match.group(1).strip())
 
-    return None
+    return "|".join(eponyms).replace("\n", " ")
 
 
 def calculate_completeness_score(entry: Dict) -> int:
@@ -86,6 +92,8 @@ def calculate_completeness_score(entry: Dict) -> int:
     score = 0
 
     # Check AI responses
+    if entry.get('response'):
+        score += 1
     if entry.get('openai_response'):
         score += 1
     if entry.get('claude_response'):
@@ -94,6 +102,8 @@ def calculate_completeness_score(entry: Dict) -> int:
         score += 1
 
     # Check extracted answers
+    if extract_final_answer(entry.get('response')):
+        score += 1
     if extract_final_answer(entry.get('openai_response')):
         score += 1
     if extract_final_answer(entry.get('claude_response')):
@@ -121,25 +131,42 @@ def process_jsonl_files(input_dir, output_path, batch_type=None, file_prefix="mi
     entries_by_disease = defaultdict(list)
 
     # First pass: collect all entries grouped by disease
-    for filename in input_path.glob(f"{file_prefix}*.jsonl"):
+    custom_ids = {}
+    print(input_path)
+    for filename in sorted(input_path.glob(f"{file_prefix}*.jsonl"), key=lambda x: x.name):
         print(f"Processing {filename}")
+        i = 0
         with open(filename, 'r') as f:
             for line in f:
+                i += 1
                 entry = json.loads(line.strip())
                 if batch_type == 'openai':
                     custom_id = entry['custom_id']
                     content = entry['response']['body']['choices'][0]['message']['content']
-                    entries_by_disease[custom_id].append(content)
+                    entries_by_disease[custom_id].append({"disease": custom_id, "openai_response": content})
                 elif batch_type == 'claude':
                     custom_id = entry['custom_id']
                     if 'result' in entry:
                         content = entry['result']['message']['content'][0]['text']
                     else:
                         print(f"Unexpected entry format: {line}")
-                    entries_by_disease[custom_id].append(content)
+                    entries_by_disease[custom_id].append({"disease": custom_id, "claude_response": content})
+                elif batch_type == 'gemini':
+                    custom_id = entry['request']['custom_id']
+                    if 'result' in entry:
+                        content = entry['result']['message']['content'][0]['text']
+                    else:
+                        print(f"Unexpected entry format: {line}")
+                    entries_by_disease[custom_id].append({"disease": custom_id, "claude_response": content})
                 else:
                     disease = entry['disease']
-                    entries_by_disease[disease].append(entry)
+                    custom_id = disease
+                    # if filename.name == "desc_out_2.jsonl":
+                    #     custom_id = f"{str(i)}{re.sub(r'[^a-zA-Z0-9_-]', '', disease.strip())}"[:63]
+                    #     custom_ids[disease] = custom_id
+                    # else:
+                    #     custom_id = custom_ids[disease]
+                    entries_by_disease[custom_id].append(entry)
 
     # Process entries, handling duplicates
     data = []
@@ -152,23 +179,26 @@ def process_jsonl_files(input_dir, output_path, batch_type=None, file_prefix="mi
         else:
             most_complete_entry = entries[0]
 
-        # Process Presidio response
-        presidio_entities = json.loads(most_complete_entry['presidio_response'])
         presidio_names = []
         presidio_scores = []
-        if presidio_entities:
-            presidio_names = [entity['name'].strip() for entity in presidio_entities]
-            presidio_scores = [str(entity['score']) for entity in presidio_entities]
+        # Process Presidio response
+        if batch_type == 'none':
+            presidio_entities = json.loads(most_complete_entry['presidio_response'])
+            if presidio_entities:
+                presidio_names = [entity['name'].strip() for entity in presidio_entities]
+                presidio_scores = [str(entity['score']) for entity in presidio_entities]
 
         # Extract answers from the most complete entry
         data.append({
             'disease': disease,
-            'openai_answer': extract_final_answer(most_complete_entry['openai_response']),
-            'openai_eponym': extract_eponym(most_complete_entry['openai_response']),
-            'claude_answer': extract_final_answer(most_complete_entry['claude_response']),
-            'claude_eponym': extract_eponym(most_complete_entry['claude_response']),
-            'gemini_answer': extract_final_answer(most_complete_entry['gemini_response']),
-            'gemini_eponym': extract_eponym(most_complete_entry['gemini_response']),
+            'q30b8_answer': extract_final_answer(most_complete_entry.get('response',"")),
+            'q30b8_eponym': extract_eponym(most_complete_entry.get('response',"")),
+            'openai_answer': extract_final_answer(most_complete_entry.get('openai_response',"")),
+            'openai_eponym': extract_eponym(most_complete_entry.get('openai_response',"")),
+            'claude_answer': extract_final_answer(most_complete_entry.get('claude_response',"")),
+            'claude_eponym': extract_eponym(most_complete_entry.get('claude_response',"")),
+            'gemini_answer': extract_final_answer(most_complete_entry.get('gemini_response',"")),
+            'gemini_eponym': extract_eponym(most_complete_entry.get('gemini_response',"")),
             'presidio_entities': ';'.join(presidio_names),
             'presidio_scores': ';'.join(presidio_scores)
         })
@@ -179,7 +209,7 @@ def process_jsonl_files(input_dir, output_path, batch_type=None, file_prefix="mi
     # Save the main results
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(output_path, index=False)
+    df.to_csv(output_path, quoting=csv.QUOTE_MINIMAL, sep=',', index=False)
 
     return df
 
@@ -189,7 +219,7 @@ def main():
 
     parser.add_argument('-i','--input', help='Directory containing the input JSONL files')
     parser.add_argument('-o','--output', help='Path to save the output CSV file')
-    parser.add_argument('-b','--batch-type', choices=['openai', 'claude', 'none'], help='Type of batch processing (openai, claude, or none)')
+    parser.add_argument('-b','--batch-type', choices=['openai', 'claude', 'gemini', 'none'], help='Type of batch processing (openai, claude, gemini, or none)')
     parser.add_argument('-p','--prefix', help='Prefix for input files to process')
     parser.add_argument('-s','--stats', action='store_true', help='Print summary statistics after processing')
 
@@ -199,8 +229,8 @@ def main():
     batch_type = None if args.batch_type == 'none' else args.batch_type
     # Process files
     df = process_jsonl_files(
-        input_dir=data_path / 'eponyms_input' / args.input,
-        output_path=data_path / 'eponyms_output' / args.output,
+        input_dir=args.input,
+        output_path=args.output,
         batch_type=batch_type,
         file_prefix=args.prefix
     )
@@ -210,7 +240,7 @@ def main():
         print("\nSummary Statistics:")
         print(f"Total processed entries: {len(df)}")
         print("\nResponse distributions:")
-        for model in ['openai', 'claude', 'gemini']:
+        for model in ['q30b8', 'openai', 'claude', 'gemini']:
             print(f"\n{model.capitalize()} responses:")
             print(df[f'{model}_answer'].value_counts(dropna=False))
 
