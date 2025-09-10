@@ -333,8 +333,8 @@ concept_id,eponym,concept_name
 4209284,Bardet|Biedl,Bardet-Biedl syndrome
 4090511,Barkan,Barkan membrane
 4273442,Barlow,Barlow test - finding
-4100296,Barlow,Barlow test positive
 4102270,Barlow,Barlow test negative
+4100296,Barlow,Barlow test positive
 40388608,Barraquer|Simons,(Lipodystrophy) or (Barraquer - Simons disease)
 36715844,Barrett,Primary adenocarcinoma of lower third of esophagus due to Barrett esophagus
 40398515,Barrett's,(Ulcerative esophagitis) or (Barrett's esophagus)
@@ -462,10 +462,13 @@ concept_id,eponym,concept_name
 36713499,Beemer|Ertbruggen,Beemer Ertbruggen syndrome
 4247540,Beevor's|sign,Beevor's sign
 37162898,Behçet,Behçet disease of small intestine
+37162248,Behçet,Hereditary pediatric Behçet-like disease
 3655585,Behçet,Mucocutaneous Behçet disease
 606081,Behçet,Transient neonatal Behçet disease
 4293711,Behçet's,Behçet's disease affecting oral mucosa
 40585629,Behçet's,Behçet's syndrome
+4295174,Behçet's,Penile ulceration due to Behçet's disease
+4296501,Behçet's,Vulval ulceration due to Behçet's disease
 602881,Behcet,Anogenital ulceration due to Behcet disease
 37170171,Behcet,Arthropathy of left ankle due to Behcet syndrome
 37169527,Behcet,Arthropathy of left knee due to Behcet syndrome
@@ -514,9 +517,6 @@ concept_id,eponym,concept_name
 4256466,Behcet's,Iritis in Behcet's syndrome
 4253619,Behcet's,Panuveitis in Behcet's syndrome
 4061051,Behcet's,Ulceration of vulva in Behcet's disease
-37162248,Behçet,Hereditary pediatric Behçet-like disease
-4295174,Behçet's,Penile ulceration due to Behçet's disease
-4296501,Behçet's,Vulval ulceration due to Behçet's disease
 37397556,Behr,Behr syndrome
 4300336,beigelii,Trichosporon beigelii infection (piedra)
 36714451,Beighton,Multiple epiphyseal dysplasia Beighton type
@@ -580,8 +580,8 @@ concept_id,eponym,concept_name
 40565502,Binswanger's,Binswanger's disease
 35622702,Birk|Barel,Intellectual disability Birk-Barel type
 4164139,Birnbaum's,Birnbaum's syndrome
-3526079,Birt|Hogg|Dube,Birt Hogg Dube syndrome
 37166981,Birt|Hogg|Dubé,Birt Hogg Dubé syndrome
+3526079,Birt|Hogg|Dube,Birt Hogg Dube syndrome
 4087937,Bitot's,Bitot's spots
 377822,Bitot's,Vitamin A deficiency with Bitot's spot AND conjunctival xerosis
 40387724,Bitot's,Vitamin A deficiency with Bitot's spot and conjunctival xerosis
@@ -757,17 +757,17 @@ concept_id,eponym,concept_name
 1245142,Brenner,Malignant Brenner tumor of ovary
 36713570,BRESEK,BRESEK syndrome
 40346987,Bright's,(Nephritis NOS) or (Bright's disease)
-4030512,Bright's,Bright's disease
 40317618,Bright's,(Nephritis NOS) or (Bright's disease)
+4030512,Bright's,Bright's disease
 40394703,Bright's,Nephritis (& [acute] or [acute glomerulonephritis] or [Bright's disease])
 40386236,Brill|Symmers,(Nodular lymphoma: Brill-Symmers disease) or (reticulosarcoma - follicular or nodular)
 40384953,Brill|Symmers',"[M]Malignant lymphoma, nodular NOS (& [Brill - Symmers' disease])"
 3580942,Brill|Symmers',"[M]Malignant lymphoma, nodular NOS (& [Brill - Symmers' disease])"
 433145,Brill|Zinsser,Brill-Zinsser disease
-3581169,Briquet's|Dhat,[X]Neurotic disorders: [Briquet's disorder] or [Dhat syndrome] or [occupational neurosis including writer's cramp] or [psychasthenia] or [psychogenic syncope]
-40388744,Briquet's|Dhat,[X]Neurotic disorders: [Briquet's disorder] or [Dhat syndrome] or [occupational neurosis including writer's cramp] or [psychasthenia] or [psychogenic syncope]
 40649381,Briquet's,Briquet's disorder
 4216772,Briquet's,Briquet's syndrome
+3581169,Briquet's|Dhat,[X]Neurotic disorders: [Briquet's disorder] or [Dhat syndrome] or [occupational neurosis including writer's cramp] or [psychasthenia] or [psychogenic syncope]
+40388744,Briquet's|Dhat,[X]Neurotic disorders: [Briquet's disorder] or [Dhat syndrome] or [occupational neurosis including writer's cramp] or [psychasthenia] or [psychogenic syncope]
 4042719,Broca's,Broca's dysphasia
 4339386,Brock|Suckow,Brock-Suckow polyposis syndrome
 4179769,Brocq,Diffuse neurodermatitis of Brocq
@@ -787,19 +787,10 @@ concept_id,eponym,concept_name
 37111251,Brooks,X-linked intellectual disability Brooks type
 76122,Brown's,Brown's tendon sheath syndrome
 4303969,Brown|McLean,Brown-McLean Syndrome
-36715769,Brown|Séquard,Brown-Séquard syndrome at L3 level
-36715663,Brown|Sequard,Brown-Sequard syndrome at C1 level
-36715670,Brown|Sequard,Brown-Sequard syndrome at C8 level
-36715664,Brown|Sequard,Brown-Sequard syndrome at C2 level
-36715665,Brown|Sequard,Brown-Sequard syndrome at C3 level
-36715666,Brown|Sequard,Brown-Sequard syndrome at C4 level
-36715667,Brown|Sequard,Brown-Sequard syndrome at C5 level
-36715668,Brown|Sequard,Brown-Sequard syndrome at C6 level
-36715669,Brown|Sequard,Brown-Sequard syndrome at C7 level
-36715662,Brown|Sequard,Brown-Sequard syndrome of cervical spinal cord
 4101563,Brown|Séquard,Brown-Séquard syndrome
 36715768,Brown|Séquard,Brown-Séquard syndrome at L1 level
 36717344,Brown|Séquard,Brown-Séquard syndrome at L2 level
+36715769,Brown|Séquard,Brown-Séquard syndrome at L3 level
 36715770,Brown|Séquard,Brown-Séquard syndrome at L4 level
 36715771,Brown|Séquard,Brown-Séquard syndrome at L5 level
 36715736,Brown|Séquard,Brown-Séquard syndrome at T1 level
@@ -816,6 +807,15 @@ concept_id,eponym,concept_name
 36715743,Brown|Séquard,Brown-Séquard syndrome at T9 level
 36717480,Brown|Séquard,Brown-Séquard syndrome of lumbar spinal cord
 36715735,Brown|Séquard,Brown-Séquard syndrome of thoracic spinal cord
+36715663,Brown|Sequard,Brown-Sequard syndrome at C1 level
+36715664,Brown|Sequard,Brown-Sequard syndrome at C2 level
+36715665,Brown|Sequard,Brown-Sequard syndrome at C3 level
+36715666,Brown|Sequard,Brown-Sequard syndrome at C4 level
+36715667,Brown|Sequard,Brown-Sequard syndrome at C5 level
+36715668,Brown|Sequard,Brown-Sequard syndrome at C6 level
+36715669,Brown|Sequard,Brown-Sequard syndrome at C7 level
+36715670,Brown|Sequard,Brown-Sequard syndrome at C8 level
+36715662,Brown|Sequard,Brown-Sequard syndrome of cervical spinal cord
 44783873,Brown|Vialetto|Van Laere,Brown-Vialetto-Van Laere syndrome
 36716007,brucei,Encephalitis caused by Trypanosoma brucei
 3655324,brucei,Encephalitis caused by Trypanosoma brucei gambiense
@@ -859,8 +859,8 @@ concept_id,eponym,concept_name
 4091308,brucellosis,Other brucellosis
 40601766,brucellosis,Ovine brucellosis
 40431883,Brucellosis,Porcine brucellosis
-40276823,Brucellosis|Brucella,Brucellosis due to other Brucella sp.
 4009324,Brucellosis|Brucella,Brucellosis due to Brucella species
+40276823,Brucellosis|Brucella,Brucellosis due to other Brucella sp.
 380711,Bruch's,Hyaline dystrophy of Bruch's membrane
 3520911,Bruch's,Other Bruch's membrane dystrophy
 4109406,Bruch's,Other Bruch's membrane dystrophy
@@ -1013,6 +1013,10 @@ concept_id,eponym,concept_name
 40394901,cesarian,[X]Infection of cesarian section wound following delivery
 40319235,Cesarian,Cesarian section: [emergency] or [NOS]
 40358601,Cesarian,Cesarian section: [emergency] or [NOS]
+36715052,Chédiak|Higashi,Attenuated Chédiak–Higashi syndrome
+4006317,Chédiak|Higashi,Chédiak-Higashi syndrome
+46271357,Chédiak|Higashi,Periodontitis co-occurrent with Chédiak-Higashi syndrome
+37162261,Chédiak|Higashi,Periodontitis exacerbated by Chédiak-Higashi syndrome
 4301103,Chabertia,Infection by Chabertia
 4211640,Chadwick's,Chadwick's sign
 3656065,Chaga,Myocarditis due to Chaga disease
@@ -1183,10 +1187,6 @@ concept_id,eponym,concept_name
 46271812,Child|Pugh,Child-Pugh score class B
 46271813,Child|Pugh,Child-Pugh score class C
 37396430,Chitty|Hall|Baraitser,Chitty Hall Baraitser syndrome
-36715052,Chédiak|Higashi,Attenuated Chédiak–Higashi syndrome
-4006317,Chédiak|Higashi,Chédiak-Higashi syndrome
-46271357,Chédiak|Higashi,Periodontitis co-occurrent with Chédiak-Higashi syndrome
-37162261,Chédiak|Higashi,Periodontitis exacerbated by Chédiak-Higashi syndrome
 36717390,Christian,Adducted thumbs and arthrogryposis syndrome Christian type
 45765420,Christianson,Christianson syndrome
 36675011,Christianson|Fourie,Hidrotic ectodermal dysplasia Christianson Fourie type
@@ -1263,7 +1263,6 @@ concept_id,eponym,concept_name
 4100636,connori,Infection by Nosema connori
 4160748,Conradi|Hünermann,"Chondrodysplasia punctata, Conradi-Hünermann type"
 40432093,Conradi|Hünermann,"Chondrodysplasia punctata, Conradi-Hünermann type"
-37119153,dentatorubropallidoluysian,Chorea co-occurrent and due to dentatorubropallidoluysian degeneration
 40460674,Conradi|Hunermann,Conradi-Hunermann syndrome
 4158547,cookii,Infection caused by Mycobacterium cookii
 36717415,Cooks,Cooks syndrome
@@ -1466,6 +1465,8 @@ concept_id,eponym,concept_name
 4031632,Cuterebra,Infestation by Cuterebra
 40647369,Cyriax's,Cyriax's syndrome
 37204272,Czarny|Ratajczak,Spondylometaphyseal dysplasia Czarny Ratajczak type
+4212470,Débré|Sémélaigne's,Débré-Sémélaigne's syndrome
+4009656,Déjérine|Sottas,Déjérine-Sottas disease
 4124127,Daltonism,Daltonism
 36715269,Dandy|Walker,Craniosynostosis with Dandy-Walker malformation and hydrocephalus syndrome
 37116396,Dandy|Walker,Dandy-Walker malformation with postaxial polydactyly syndrome
@@ -1502,13 +1503,13 @@ concept_id,eponym,concept_name
 1245008,de Barsy,Pyrroline-5-carboxylate reductase 1 related de Barsy syndrome
 40320884,de Quervain's,(Synovitis/tenosynovitis - wrist) or (de Quervain's tenosynovitis)
 40353939,de Quervain's,(Synovitis/tenosynovitis - wrist) or (de Quervain's tenosynovitis)
+40437580,De Quervain's,De Quervain's thyroiditis
 40320742,de Quervain's,Subacute thyroiditis (& [de Quervain's])
 40386323,de Quervain's,Subacute thyroiditis (& [de Quervain's])
-37115770,De Silva,Marfanoid syndrome De Silva type
-4312878,de Vries,"Renal glycinuria, de Vries type"
-40437580,De Quervain's,De Quervain's thyroiditis
 4189477,De Sanctis|Cacchione,De Sanctis-Cacchione syndrome
 40461263,De Sanctis|Cacchione,De Sanctis-Cacchione syndrome
+37115770,De Silva,Marfanoid syndrome De Silva type
+4312878,de Vries,"Renal glycinuria, de Vries type"
 37110117,Decaudain|Vigouroux,Laminopathy type Decaudain Vigouroux
 4033365,Degos|Touraine,Degos-Touraine syndrome
 40390174,Dejerine|Thomas,Dejerine-Thomas syndrome
@@ -1521,6 +1522,7 @@ concept_id,eponym,concept_name
 3519364,Dent's,Dent's disease
 3543652,Dent's,Dent's disease
 40480260,Dent's,Dent's disease
+37119153,dentatorubropallidoluysian,Chorea co-occurrent and due to dentatorubropallidoluysian degeneration
 4239176,Dentatorubropallidoluysian,Dentatorubropallidoluysian degeneration
 40273862,DeSanctis|Cacchione,DeSanctis-Cacchione syndrome
 4113729,Desbuquois,Desbuquois syndrome
@@ -1578,8 +1580,6 @@ concept_id,eponym,concept_name
 4080429,Donovanosis,Donovanosis - inguinal lesion
 4082027,Donovanosis,Donovanosis - non-genital lesion
 37164891,DONSON,"DONSON-related microcephaly, short stature, limb abnormalities spectrum"
-4212470,Débré|Sémélaigne's,Débré-Sémélaigne's syndrome
-4009656,Déjérine|Sottas,Déjérine-Sottas disease
 4194151,Doppler,Doppler studies abnormal
 4223182,doppler,Finding of pulse taking by doppler
 4189651,Doucas|Kapetanakis,Eczematid-like purpura of Doucas and Kapetanakis
@@ -1697,6 +1697,7 @@ concept_id,eponym,concept_name
 4308093,Dupuytren's,Dupuytren's disease of palm
 4001790,Dupuytren's,Dupuytren's disease of palm and finger
 4003147,Dupuytren's,"Dupuytren's disease of palm and finger, with contracture"
+4001132,Dupuytren's,"Dupuytren's disease of palm and finger(s), nodules with no contracture"
 37109059,Dupuytren's,Dupuytren's disease of palm of left hand
 37117099,Dupuytren's,Dupuytren's disease of palm of right hand
 4001785,Dupuytren's,"Dupuytren's disease of palm, nodules with no contracture"
@@ -1705,7 +1706,6 @@ concept_id,eponym,concept_name
 4234887,Dupuytren's,Dupuytren's fracture of radius
 40605963,Dupuytren's,Dupuytren's fracture of radius
 40407446,Dupuytren's,"Open fracture of the radius: [distal, unspecified] or [Dupuytren's]"
-4001132,Dupuytren's,"Dupuytren's disease of palm and finger(s), nodules with no contracture"
 761134,Dupuytrens,Dupuytrens contracture of bilateral hands
 4032282,Durlachers,Durlachers corn
 4212969,Duroziez's,Duroziez's murmur
@@ -2059,13 +2059,13 @@ concept_id,eponym,concept_name
 4260324,Ewing's,Primitive neuroectodermal tumor/Ewing's sarcoma TNM finding
 4249707,Ewing's,pT1: Tumor 5 cm or less in greatest dimension (extraosseous primitive neuroectodermal tumor/Ewing's sarcoma)
 4257536,Ewing's,pT1: Tumor 8 cm or less in greatest dimension (osseous primitive neuroectodermal tumor/Ewing's sarcoma)
+4257535,Ewing's,"pT1a: Tumor 5 cm or less in greatest dimension, superficial tumor (extraosseous primitive neuroectodermal tumor/Ewing's sarcoma)"
 4260321,Ewing's,"pT1b: Tumor 5 cm or less in greatest dimension, deep tumor (extraosseous primitive neuroectodermal tumor/Ewing's sarcoma)"
 4253002,Ewing's,pT2: Tumor more than 5 cm in greatest dimension (extraosseous primitive neuroectodermal tumor/Ewing's sarcoma)
 4260323,Ewing's,pT2: Tumor more than 8 cm in greatest dimension (osseous primitive neuroectodermal tumor/Ewing's sarcoma)
 4253003,Ewing's,"pT2a: Tumor more than 5 cm in greatest dimension, superficial tumor (extraosseous primitive neuroectodermal tumor/Ewing's sarcoma)"
 4260322,Ewing's,"pT2b: Tumor more than 5 cm in greatest dimension, deep tumor (extraosseous primitive neuroectodermal tumor/Ewing's sarcoma)"
 4257537,Ewing's,pT3: Discontinuous tumors in the primary bone site (osseous primitive neuroectodermal tumor/Ewing's sarcoma)
-4257535,Ewing's,"pT1a: Tumor 5 cm or less in greatest dimension, superficial tumor (extraosseous primitive neuroectodermal tumor/Ewing's sarcoma)"
 4265728,Fabricius,Disorder of bursa of Fabricius
 3654627,Fabry,Autonomic neuropathy due to Fabry disease
 604632,Fabry,Glomerular disease due to Fabry disease
@@ -2279,6 +2279,7 @@ concept_id,eponym,concept_name
 4219329,fallopian,"pT1a (IA): Tumor limited to one fallopian tube, without penetrating the serosal surface; no ascites (TNM category and FIGO stage) (fallopian tube)"
 4219430,fallopian,"pT1b (IB): Tumor limited to both tubes, without penetrating the serosal surface; no ascites (TNM category and FIGO stage) (fallopian tube)"
 4161968,fallopian,pT2 (II): Tumor involves one or both fallopian tubes with pelvic extension (TNM category and FIGO stage) (fallopian tube)
+4221383,fallopian,pT2a (IIA): Tumor involves one or both fallopian tubes with extension and/or metastasis to the uterus and/or ovaries (TNM category and FIGO stage) (fallopian tube)
 4162088,fallopian,pT2b (IIB): Tumor involves one or both fallopian tubes with extension to other pelvic structures (TNM category and FIGO stage) (fallopian tube)
 4164163,fallopian,pT2c (IIC): Tumor involves one or both fallopian tubes with pelvic extension with malignant cells in ascites or peritoneal washings (TNM category and FIGO stage) (fallopian tube)
 4162084,fallopian,"pT3 (III): Tumor involves one or both fallopian tubes, with peritoneal implants outside the pelvis (TNM category and FIGO stage) (fallopian tube)"
@@ -2311,7 +2312,6 @@ concept_id,eponym,concept_name
 201913,fallopian,"Torsion of the ovary, ovarian pedicle or fallopian tube"
 4137347,fallopian,Transection of fallopian tube
 4164623,fallopian,Tumor microscopically involves only the fallopian tube
-4221383,fallopian,pT2a (IIA): Tumor involves one or both fallopian tubes with extension and/or metastasis to the uterus and/or ovaries (TNM category and FIGO stage) (fallopian tube)
 40489971,Fallot,Absent pulmonary valve syndrome with ventricular septal defect of non Fallot type
 40490939,Fallot,Anterior deviation of infundibular septum of Fallot type
 3543114,Fallot,Atrioventricular septal defect associated with tetralogy of Fallot
@@ -2335,8 +2335,8 @@ concept_id,eponym,concept_name
 40403688,Fallot,Tetralogy of Fallot: [unspecified] or [ventricular septal defect in] or [dextraposition of aorta in]
 4103131,Fallot's,Dextraposition of aorta in Fallot's tetralogy
 4184636,Fallot's,Fallot's triad
-4101620,Fallot's,Ventricular septal defect in Fallot's tetralogy
 4070916,Fallot's,Fallot's trilogy
+4101620,Fallot's,Ventricular septal defect in Fallot's tetralogy
 4126433,Fanconi,Acquired Fanconi syndrome
 37110066,Fanconi,Acquired monoclonal immunoglobulin light chain-associated Fanconi syndrome
 4128211,Fanconi,Adult Fanconi syndrome
@@ -2569,8 +2569,8 @@ concept_id,eponym,concept_name
 4287851,gibsoni,Infection by Onchocerca gibsoni
 4099740,Gilbert's,Gilbert's syndrome
 40351290,Gilbert's,Hyperbilirubinemia (& [Gilbert's syndrome])
-4048614,Gilbert's,Neonatal jaundice due to Gilbert's syndrome
 40321242,Gilbert's,Hyperbilirubinemia (& [Gilbert's syndrome])
+4048614,Gilbert's,Neonatal jaundice due to Gilbert's syndrome
 40390802,Gilchrist's,Gilchrist's disease
 36684851,gilchristii,Blastomyces dermatitidis or Blastomyces gilchristii
 40378179,Gilchrists,Blastomycosis (& [Chicago disease] or [Gilchrists disease] or [North American])
@@ -2761,14 +2761,14 @@ concept_id,eponym,concept_name
 4148704,Gross',Gross' disease
 35621906,Grubben|De Cock|Borghgraef,"Grubben, De Cock, Borghgraef syndrome"
 40406668,Guerin|Stern,Guerin-Stern syndrome
-40322804,Guillain|Barre,Acute infective polyneuritis (& [Guillain-Barre syndrome])
-40351934,Guillain|Barre,Acute infective polyneuritis (& [Guillain-Barre syndrome])
-37166081,Guillain|Barre,Disorder of autonomic nerve due to Guillain-Barre Syndrome
-42535201,Guillain|Barre,Sequela of Guillain Barre syndrome
 4164770,Guillain|Barré,Guillain-Barré syndrome
 37164489,Guillain|Barré,Ophthalmoplegia due to and following Guillain-Barré syndrome
 35624130,Guillain|Barré,Paraparetic variant of Guillain-Barré syndrome
 37204369,Guillain|Barré,Pharyngeal-cervical-brachial variant of Guillain-Barré syndrome
+40322804,Guillain|Barre,Acute infective polyneuritis (& [Guillain-Barre syndrome])
+40351934,Guillain|Barre,Acute infective polyneuritis (& [Guillain-Barre syndrome])
+37166081,Guillain|Barre,Disorder of autonomic nerve due to Guillain-Barre Syndrome
+42535201,Guillain|Barre,Sequela of Guillain Barre syndrome
 4219349,Gullner,"Familial hypokalemic alkalosis, Gullner type"
 36716264,Gustavson,Severe X-linked intellectual disability Gustavson type
 4263563,Gutierrezia,Gutierrezia microcephala poisoning
@@ -2865,17 +2865,17 @@ concept_id,eponym,concept_name
 4299049,Henneguya,Infection by Henneguya
 4121804,Hennekam,Hennekam syndrome
 36716445,Hennekam|Beemer,Hennekam Beemer syndrome
+606438,Henoch|Schönlein,Gastric ulcer due to Henoch-Schönlein purpura
+37018634,Henoch|Schönlein,Glomerulonephritis due to Henoch-Schönlein purpura
+40451196,Henoch|Schönlein,Henoch-Sch?nlein purpura
+4128223,Henoch|Schönlein,Henoch-Schönlein nephritis
+40547679,Henoch|Schönlein,Henoch-Schönlein purpura
 40353862,Henoch|Schonlein,[EDTA] Henoch-Schonlein purpura associated with renal failure
 40353846,Henoch|Schonlein,"[EDTA] IgA nephropathy (proven by immunofluorescence, excluding Henoch-Schonlein purpura) associated with renal failure"
 40390485,Henoch|Schonlein,Henoch-Schonlein nephritis
 3581335,Henoch|Schonlein,Henoch-Schonlein purpura associated with renal failure - EDTA (European Dialysis and Transplant Association)
 3563305,Henoch|Schonlein,"IgA nephropathy (proven by immunofluorescence, excluding Henoch-Schonlein purpura) associated with renal failure - EDTA (European Dialysis and Transplant Association)"
 40351352,Henoch|Schonlein,Purpura: [allergic] or [Henoch-Schonlein allergy]
-606438,Henoch|Schönlein,Gastric ulcer due to Henoch-Schönlein purpura
-37018634,Henoch|Schönlein,Glomerulonephritis due to Henoch-Schönlein purpura
-40451196,Henoch|Schönlein,Henoch-Sch?nlein purpura
-4128223,Henoch|Schönlein,Henoch-Schönlein nephritis
-40547679,Henoch|Schönlein,Henoch-Schönlein purpura
 40321713,Henoch|Schonlein,Purpura: [allergic] or [Henoch-Schonlein allergy]
 4290978,Herlitz,Junctional epidermolysis bullosa gravis of Herlitz
 40401906,Herlitz,Junctional epidermolysis bullosa gravis of Herlitz
@@ -2926,6 +2926,7 @@ concept_id,eponym,concept_name
 4190587,Hobaek,Brachyolmia - Hobaek type
 36716775,Hodgkin,B-cell lymphoma unclassifiable with features intermediate between classical Hodgkin lymphoma and diffuse large B-cell lymphoma
 42538850,Hodgkin,Classical Hodgkin lymphoma
+607956,Hodgkin,Composite Hodgkin and non-Hodgkin lymphoma
 37165828,Hodgkin,Hodgkin disease of lymph nodes of head
 37165830,Hodgkin,Hodgkin disease of lymph nodes of head and neck
 37165862,Hodgkin,Hodgkin disease of lymph nodes of lower limb
@@ -3166,6 +3167,7 @@ concept_id,eponym,concept_name
 40648885,Hodgkin's,"Hodgkin's disease, nodular sclerosis of intrathoracic lymph nodes"
 439288,Hodgkin's,"Hodgkin's disease, nodular sclerosis of lymph nodes of axilla and upper limb"
 314600,Hodgkin's,"Hodgkin's disease, nodular sclerosis of lymph nodes of axilla AND/OR upper limb"
+435198,Hodgkin's,"Hodgkin's disease, nodular sclerosis of lymph nodes of head, face and neck"
 442158,Hodgkin's,"Hodgkin's disease, nodular sclerosis of lymph nodes of head, face AND/OR neck"
 197231,Hodgkin's,"Hodgkin's disease, nodular sclerosis of lymph nodes of inguinal region and lower limb"
 442157,Hodgkin's,"Hodgkin's disease, nodular sclerosis of lymph nodes of inguinal region AND/OR lower limb"
@@ -3285,8 +3287,6 @@ concept_id,eponym,concept_name
 765741,Hodgkin's|Lugano,Diffuse non-Hodgkin's lymphoma Lugano stage II
 765717,Hodgkin's|Lugano,Diffuse non-Hodgkin's lymphoma Lugano stage III
 764840,Hodgkin's|Lugano,Diffuse non-Hodgkin's lymphoma Lugano stage IV
-435198,Hodgkin's,"Hodgkin's disease, nodular sclerosis of lymph nodes of head, face and neck"
-607956,Hodgkin,Composite Hodgkin and non-Hodgkin lymphoma
 4187736,hodleri,Infection caused by Mycobacterium hodleri
 40388619,Hoffa's,(Liposynovitis prepatellaris) or (Hoffa's Disease)
 4217764,Hoffa's,Hoffa's disease
@@ -3358,8 +3358,8 @@ concept_id,eponym,concept_name
 4197379,Hurloid,Hurloid facies
 4101731,Hurst,Acute and subacute hemorrhagic leukoencephalitis [Hurst]
 4307263,Hurthle,Hurthle cell carcinoma of thyroid
-37165588,Hurthle,Primary Hurthle cell carcinoma of thyroid
 4055363,Hurthle,Hurthle cell metaplasia of thyroid gland
+37165588,Hurthle,Primary Hurthle cell carcinoma of thyroid
 762777,Hutch,Hutch diverticulum
 4256470,Hutchinson,Hutchinson sign
 4280666,Hutchinson's,Hutchinson's facies
@@ -3394,7 +3394,6 @@ concept_id,eponym,concept_name
 4006657,Jadassohn|Pellizzari,Jadassohn-Pellizzari anetoderma
 4033198,Jakac|Wolf,Papuloverrucous palmoplantar keratoderma of Jakac-Wolf
 37396005,Jakob|Creutzfeldt,Iatrogenic Jakob-Creutzfeldt disease
-4120449,von Jaksch's,von Jaksch's anemia
 4190518,Janeway,Janeway lesion
 4078643,Jansen,"Metaphyseal chondrodysplasia, Jansen type"
 40401413,Jansen|Schmid,(Metaphyseal dysostosis) or (Jansen metaphyseal dysostosis) or (Schmid metaphys dysostosis) or (craniometaphys dysostosis) or (frontometaphys dysostosis) or (metaphyseal dysplasia)
@@ -3434,6 +3433,7 @@ concept_id,eponym,concept_name
 4231424,Köbner,Köbner phenomenon
 4031651,Köbner,Köbner psoriasis
 4297504,Köbner,Köbner reaction from lichen planus
+4300898,Köbnerization,Vitiligo due to Köbnerization
 4345330,Kümmell,Kümmell disease
 4280656,Kümmell's,Kümmell's disease
 37163212,Kaeser,Neurogenic scapuloperoneal syndrome Kaeser type
@@ -3467,6 +3467,7 @@ concept_id,eponym,concept_name
 3580923,Kaposi's,[X]Kaposi's sarcoma of multiple organs
 40385430,Kaposi's,[X]Kaposi's sarcoma of multiple organs
 44812786,Kaposi's,[X]Kaposi's sarcoma of multiple organs
+40385764,Kaposi's,[X]Kaposi's sarcoma of multiple organs
 40385439,Kaposi's,[X]Kaposi's sarcoma of other sites
 44793975,Kaposi's,[X]Kaposi's sarcoma of other sites
 3580704,Kaposi's,"[X]Kaposi's sarcoma, unspecified"
@@ -3496,7 +3497,6 @@ concept_id,eponym,concept_name
 4087996,Kaposi's,Kaposi's varicelliform eruption caused by herpes simplex virus
 4096019,Kaposi's,Kaposi's varicelliform eruption caused by vaccinia virus
 4311719,Kaposi's,Primary Kaposi's sarcoma of oral cavity
-40385764,Kaposi's,[X]Kaposi's sarcoma of multiple organs
 4300580,Kaposiform,Kaposiform hemangioendothelioma
 37164085,Kaposiform,Kaposiform lymphangiomatosis
 36716139,Kapur|Toriello,Kapur Toriello syndrome
@@ -3654,7 +3654,6 @@ concept_id,eponym,concept_name
 4102346,Kojevnikov's,Kojevnikov's epilepsy
 4251932,Kommerell's,Kommerell's diverticulum
 37397261,Koolen|De|Vries,Koolen De Vries syndrome
-4300898,Köbnerization,Vitiligo due to Köbnerization
 4155889,Koplik,Koplik spots
 4153587,Koplik's,O/E - mouth - Koplik's spots
 4288013,Korsakoff's,Korsakoff's psychosis
@@ -3979,9 +3978,9 @@ concept_id,eponym,concept_name
 4096680,Little's,Prominent vessels on Little's area
 4080779,Littré,Gonococcal Littré gland abscess
 4295793,Littré,Littré hernia
+4188049,Littré's,Abscess of Littré's glands
 40396098,Littre's,Gland abscess: [urethral] or [Littre's]
 4080596,Littritis,Gonococcal Littritis
-4188049,Littré's,Abscess of Littré's glands
 40390286,Lloyd's,Lloyd's syndrome
 40387676,Lloyd's|Schmidt's,([Lloyd's] or [Schmidt's] syndrome) or (other combinations of endocrine dysfunction)
 4305800,Lobelia,Lobelia inflata poisoning
@@ -4032,6 +4031,9 @@ concept_id,eponym,concept_name
 76705,Ménière's,Cochlear active Ménière's disease
 79033,Ménière's,Cochleovestibular active Ménière's disease
 40567942,Ménière's,Inactive Ménière's disease
+76130,Ménière's,Inactive Ménière's disease
+79833,Ménière's,Ménière's disease
+77882,Ménière's,Vestibular active Ménière's disease
 608066,Müllerian,Malignant mixed Müllerian neoplasm of corpus uteri
 45765424,Müllerian,Persistent Müllerian duct syndrome
 37151134,Müllerian,Primary malignant Müllerian mixed neoplasm of cervix uteri
@@ -4107,8 +4109,8 @@ concept_id,eponym,concept_name
 40355056,Marfan's,(Congenital anomaly NOS) or (thyroglossal cyst) or (situs inversus) or (Marfan's syndrome) or (tuberose sclerosis)
 42535092,Marfan's,Dilatation of aortic root due to Marfan's syndrome
 258540,Marfan's,Marfan's syndrome
-4124854,Marfan's,Marfan's syndrome affecting skin
 40322479,Marfan's,Marfan's syndrome
+4124854,Marfan's,Marfan's syndrome affecting skin
 4086491,Marfanoid,Marfanoid facies
 37116372,Marfanoid,Marfanoid habitus with autosomal recessive intellectual disability syndrome
 37204240,Marfanoid,"Marfanoid habitus, inguinal hernia, advanced bone age syndrome"
@@ -4122,8 +4124,8 @@ concept_id,eponym,concept_name
 40390538,Marie's,Marie's cerebellar ataxia
 40571994,Marie's,Marie's cerebellar ataxia
 4114855,Marie|Unna,Marie Unna syndrome
-40389146,Marinesco|Sjogren,(Marinesco-Sjogren syndrome) or (disorder of metabolism NOS)
 4216348,Marinesco|Sjögren,Marinesco-Sjögren syndrome
+40389146,Marinesco|Sjogren,(Marinesco-Sjogren syndrome) or (disorder of metabolism NOS)
 40488448,Marjolin's,Marjolin's ulcer
 36674729,Markesbery|Griggs,Late-onset distal myopathy Markesbery Griggs type
 37017105,Marneffei,Disseminated infection caused by Talaromyces marneffei
@@ -4308,6 +4310,7 @@ concept_id,eponym,concept_name
 761020,Merkel,Merkel cell carcinoma of scalp
 761021,Merkel,Merkel cell carcinoma of trunk
 37016170,Merkel,Merkel cell carcinoma of upper limb
+1245879,Merkel,Primary Merkel cell carcinoma of skin of cheek
 1244295,Merkel,Primary Merkel cell carcinoma of skin of ear
 1245888,Merkel,Primary Merkel cell carcinoma of skin of eyebrow
 1244348,Merkel,Primary Merkel cell carcinoma of skin of face
@@ -4324,7 +4327,6 @@ concept_id,eponym,concept_name
 1246406,Merkel,Primary Merkel cell carcinoma of skin of right upper limb
 1245878,Merkel,Primary Merkel cell carcinoma of skin of temple
 1244352,Merkel,Primary Merkel cell carcinoma of skin of upper limb
-1245879,Merkel,Primary Merkel cell carcinoma of skin of cheek
 4020447,Mersalyl,Mersalyl poisoning
 4345695,mesnili,Chilomastix mesnili infection
 40456225,mesnili,Infection by Chilomastix mesnili
@@ -4405,9 +4407,6 @@ concept_id,eponym,concept_name
 37171305,Mooren's,Left Mooren's corneal ulcer
 435271,Mooren's,Mooren's ulcer
 37171247,Mooren's,Right Mooren's corneal ulcer
-76130,Ménière's,Inactive Ménière's disease
-79833,Ménière's,Ménière's disease
-77882,Ménière's,Vestibular active Ménière's disease
 4021984,Moraea,Moraea poisoning
 36714555,Morava|Mehes,Morava Mehes syndrome
 4238336,Morax,Morax lacunata angular conjunctivitis
@@ -4463,8 +4462,8 @@ concept_id,eponym,concept_name
 4219014,Muellerius,Infection by Muellerius
 3527808,Muenke,Muenke syndrome
 37204059,Muenke,Muenke syndrome
-3528628,Muir|Torre,Muir-Torre syndrome
 4301407,Muir|Torré,Muir-Torré syndrome
+3528628,Muir|Torre,Muir-Torre syndrome
 4095196,Mulder's,Mulder's click
 4101638,Mulders,Mulders click absent
 4113080,Mulders,Mulders click present
@@ -4929,8 +4928,8 @@ concept_id,eponym,concept_name
 4187914,Payr's,Payr's syndrome
 4035282,Pearson's,Pearson's syndrome
 4199309,Pel|Ebstein,Pel Ebstein fever
-37165107,Pelger|Huët,"Short stature, optic nerve atrophy, Pelger-Huët anomaly syndrome"
 4311674,Pelger|Huët,Pelger-Huët anomaly
+37165107,Pelger|Huët,"Short stature, optic nerve atrophy, Pelger-Huët anomaly syndrome"
 37166912,Pelizaeus|Merzbacher,Dystonia due to Pelizaeus-Merzbacher disease
 37397028,Pelizaeus|Merzbacher,Pelizaeus Merzbacher like disease
 3655824,Pelizaeus|Merzbacher,Pelizaeus Merzbacher like disease due to AIMP1 mutation
@@ -5269,9 +5268,9 @@ concept_id,eponym,concept_name
 40401891,Rothmund|Thomson,Rothmund-Thomson syndrome
 4139925,Rotor,Rotor syndrome
 4048294,Rotor's,Neonatal jaundice due to Rotor's syndrome
+4165215,Roussy|Lévy,Roussy-Lévy syndrome
 40390543,Roussy|Levy,(Cerebellar ataxia NOS) or (Roussy-Levy syndrome)
 4146484,Roussy|Levy,Roussy-Levy syndrome
-4165215,Roussy|Lévy,Roussy-Lévy syndrome
 40444241,Roux,Roux-en-Y pancreaticojejunostomy
 4260951,Rovsing's,Rovsing's sign
 4207194,Rowley|Rosenberg,Rowley-Rosenberg syndrome
@@ -5292,9 +5291,11 @@ concept_id,eponym,concept_name
 37165825,Sézary,Sézary disease of lymph nodes of head
 37165827,Sézary,Sézary disease of lymph nodes of head and neck
 37165826,Sézary,Sézary disease of lymph nodes of neck
+4116245,Sézary,Sézary disease of skin
 1246726,Sézary,Sézary syndrome of inguinal lymph nodes
 3539287,Sézary's,Sézary's disease NOS
 4091907,Sézary's,Sézary's disease NOS
+135759,Sézary's,Sézary's disease of extranodal AND/OR solid organ site
 439267,Sézary's,Sézary's disease of intra-abdominal lymph nodes
 40649757,Sézary's,Sézary's disease of intra-abdominal lymph nodes
 439270,Sézary's,Sézary's disease of intrapelvic lymph nodes
@@ -5620,17 +5621,8 @@ concept_id,eponym,concept_name
 3565903,Simpson|Golabi|Behmel,Simpson-Golabi-Behmel syndrome
 4230703,Simpson|Golabi|Behmel,Simpson-Golabi-Behmel syndrome
 4113731,Singleton|Merten,Singleton-Merten syndrome
-4103749,Sjögren,Keratoconjunctivitis sicca (excluding Sjögren syndrome)
-4006297,Sjögren|Larsson,Sjögren-Larsson syndrome
-40401494,Sjogren,(Ichthyosiform erythroderma) or (Sjogren-Larsson syndrome)
-37110518,Sjogren,Demyelination of central nervous system co-occurrent and due to Sjogren disease
-37167003,Sjogren,Myelitis due to Sjogren syndrome
-46270481,Sjogren,Tubulointerstitial nephropathy due to Sjogren syndrome
-40320284,Sjogren's,(Sicca - Sjogren's - syndrome) or (keraconjunctivitis sicca) or (Sjogren's disease)
-40353559,Sjogren's,(Sicca - Sjogren's - syndrome) or (keraconjunctivitis sicca) or (Sjogren's disease)
-40405494,Sjogren's,(Sicca - Sjogren's - syndrome) or (keratoconjunctivitis sicca)
-44814064,Sjogren's,Systemic lupus erythematosus/Sjogren's overlap syndrome
 37164727,Sjögren,Disorder of lacrimal gland due to Sjögren syndrome
+4103749,Sjögren,Keratoconjunctivitis sicca (excluding Sjögren syndrome)
 37167020,Sjögren,Meningitis due to Sjögren syndrome
 42539352,Sjögren,Pediatric onset Sjögren syndrome
 606408,Sjögren,Vasculitis due to Sjögren syndrome
@@ -5647,6 +5639,15 @@ concept_id,eponym,concept_name
 4347059,Sjögren's,Secondary Sjögren's syndrome with multisystem involvement
 4344164,Sjögren's,Secondary Sjögren's syndrome with organ/system involvement
 254443,Sjögren's,Sjögren's syndrome
+4006297,Sjögren|Larsson,Sjögren-Larsson syndrome
+40401494,Sjogren,(Ichthyosiform erythroderma) or (Sjogren-Larsson syndrome)
+37110518,Sjogren,Demyelination of central nervous system co-occurrent and due to Sjogren disease
+37167003,Sjogren,Myelitis due to Sjogren syndrome
+46270481,Sjogren,Tubulointerstitial nephropathy due to Sjogren syndrome
+40320284,Sjogren's,(Sicca - Sjogren's - syndrome) or (keraconjunctivitis sicca) or (Sjogren's disease)
+40353559,Sjogren's,(Sicca - Sjogren's - syndrome) or (keraconjunctivitis sicca) or (Sjogren's disease)
+40405494,Sjogren's,(Sicca - Sjogren's - syndrome) or (keratoconjunctivitis sicca)
+44814064,Sjogren's,Systemic lupus erythematosus/Sjogren's overlap syndrome
 36717631,Skene's,Cyst of Skene's duct
 4240578,Skene's,Skene's gland adenitis
 4080595,Skenitis,Gonococcal Skenitis
@@ -5672,8 +5673,6 @@ concept_id,eponym,concept_name
 4162239,Somogyi,Somogyi phenomenon
 40438064,Somogyi,Somogyi phenomenon
 37396245,Sonoda,Sonoda syndrome
-4116245,Sézary,Sézary disease of skin
-135759,Sézary's,Sézary's disease of extranodal AND/OR solid organ site
 40383364,sordellii,Clostridium sordellii: [infection] or [gas gangrene]
 4142822,sordellii,Gas gangrene caused by Paeniclostridium sordellii
 1245477,Sorsby,Bilateral Sorsby pseudoinflammatory fundus dystrophy
@@ -5908,9 +5907,9 @@ concept_id,eponym,concept_name
 37398932,Toriello,Chondrodysplasia punctata Toriello type
 37395884,Toriello,Microcephalic primordial dwarfism Toriello type
 36716462,Toriello|Carey,Toriello Carey syndrome
-4111308,Torrance,"Spondylodysplasia, Torrance type"
 761036,Torré|Muir,Torré-Muir syndrome co-occurrent with benign sebaceous neoplasm
 761035,Torré|Muir,Torré-Muir syndrome co-occurrent with malignant sebaceous neoplasm
+4111308,Torrance,"Spondylodysplasia, Torrance type"
 40561854,Tourette's,Tourette's disorder
 4090579,Townes,Townes syndrome
 40581677,Townes|Brocks,[X]Townes-Brocks syndrome
@@ -6084,6 +6083,7 @@ concept_id,eponym,concept_name
 4328879,Volkmann,Volkmann ischemic contracture following traumatic compartment syndrome
 4170272,von Hippel,von Hippel internal corneal ulcer
 40390445,Von Jaksch's,Anemia: [other specified] or [Von Jaksch's]
+4120449,von Jaksch's,von Jaksch's anemia
 37166157,von Willebrand,Hereditary von Willebrand disease
 4133987,von Willebrand,Hereditary von Willebrand disease type 1B
 4027380,von Willebrand,Hereditary von Willebrand disease type 2
@@ -6290,11 +6290,11 @@ concept_id,eponym,concept_name
 44783385,Wilson,Reverse curve of Wilson
 36717686,Wilson,X-linked intellectual disability Wilson type
 40351285,Wilson's,Iron &/or copper &/or magnesium disorder (& [hemochromatosis] or [Wilson's disease])
+40321222,Wilson's,Iron &/or copper &/or magnesium disorder (& [hemochromatosis] or [Wilson's disease])
 4229262,Wilson's,Wilson's disease
 40385097,Wilson's,Wilson's disease *
 4217342,Wilson's,Wilson's pronator sign
 4306125,Wilson's,Wilson's sign
-40321222,Wilson's,Iron &/or copper &/or magnesium disorder (& [hemochromatosis] or [Wilson's disease])
 4201423,Wilson|Mikity,Wilson-Mikity syndrome
 36714548,Wilson|Turner,Wilson Turner syndrome
 4110103,Winchester,Winchester syndrome
