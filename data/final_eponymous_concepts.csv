@@ -736,11 +736,11 @@ concept_id,eponym,concept_name
 4295619,Bowen's,"Bowen's disease, atrophic"
 4301426,Bowen's,"Bowen's disease, clear cell"
 4295621,Bowen's,"Bowen's disease, clonal"
-4295620,Bowen's,"Bowen's disease, pagetoid"
 4298025,Bowen's,"Bowen's disease, pigmented"
 4298024,Bowen's,"Bowen's disease, psoriasiform"
 4300472,Bowen's,"Bowen's disease, verrucous"
 40443094,Bowen's,Intraepidermal squamous cell carcinoma - Bowen's type
+4295620,Bowen's|pagetoid,"Bowen's disease, pagetoid"
 40389016,Bowen's|Queyrats's,[Carcinoma in situ] or [Bowen's disease] or [Erythroplasia] or [Queyrats's erythroplasia]
 46272737,Bowen|Conradi,Bowen-Conradi syndrome
 4119822,Bowenoid,Bowenoid actinic keratosis
@@ -2399,8 +2399,8 @@ concept_id,eponym,concept_name
 4229557,Fanconi,Fanconi syndrome
 4030528,Fanconi,Fanconi-like syndrome
 4148471,Fanconi's,Fanconi's anemia
-40455007,Fanconi|de Toni|Debre,Fanconi-de Toni-Debre syndrome
 40388126,Fanconi|de Toni,Cystine storage disease (& [Fanconi-de-Toni syndrome])
+40455007,Fanconi|de Toni|Debre,Fanconi-de Toni-Debre syndrome
 4196512,Farber's,Farber's lipogranulomatosis
 4263648,Favre,Dermite ocre of Favre
 4033793,Fawcett|Miller,Persistent acantholytic dermatosis of Fawcett and Miller
