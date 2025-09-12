@@ -455,18 +455,6 @@ concept_id,eponym,concept_name
 4187684,Baylisascaris,Infection by Baylisascaris columnaris
 4246783,Baylisascaris,Infection by Baylisascaris procyonis
 4081064,Bazex,Acrokeratosis paraneoplastica of Bazex
-4161629,BCG,Accidental BCG vaccine poisoning
-4031473,BCG,BCG granuloma
-4030986,BCG,BCG ulcer
-4158595,BCG,BCG vaccine poisoning of undetermined intent
-4294564,BCG,BCG-induced lupus vulgaris
-4294565,BCG,BCG-induced scrofuloderma
-4298868,BCG,BCG-induced tuberculide
-4031472,BCG,Cutaneous complication of BCG immunization
-4162767,BCG,Intentional BCG vaccine poisoning
-435986,BCG,Poisoning by BCG vaccine
-36716980,BCG,Post BCG intravesical immunotherapy changes
-4102198,BCG,Post BCG vaccination encephalitis
 4172755,Beals,Beals auriculo-osteodysplasia syndrome
 45773093,Beare|Stevenson,Cutis gyrata syndrome of Beare and Stevenson
 40397259,Beau's,Beau's line
@@ -783,7 +771,6 @@ concept_id,eponym,concept_name
 4112860,Brenner,Brenner tumor of ovary
 36686122,Brenner,Brenner tumor of right ovary
 1245142,Brenner,Malignant Brenner tumor of ovary
-36713570,BRESEK,BRESEK syndrome
 40317618,Bright's,(Nephritis NOS) or (Bright's disease)
 40346987,Bright's,(Nephritis NOS) or (Bright's disease)
 4030512,Bright's,Bright's disease
@@ -5305,7 +5292,6 @@ concept_id,eponym,concept_name
 40345086,Rickettsioses|leishmaniasis,(Rickettsioses/arthropod NOS) or (leishmaniasis)
 40379757,Rickettsiosis,"[X]Rickettsiosis, unspecified"
 44800242,Rickettsiosis,"[X]Rickettsiosis, unspecified"
-37204440,RIDDLE,RIDDLE syndrome
 4232577,Riddoch,Riddoch phenomenon
 4033143,Riedel's,Riedel's lobe of liver
 4228334,Riedel's,Riedel's thyroiditis
@@ -6141,8 +6127,6 @@ concept_id,eponym,concept_name
 4244836,Vater,pT2: Tumor invades duodenal wall (ampulla of Vater)
 4245243,Vater,pT3: Tumor invades pancreas (ampulla of Vater)
 4262448,Vater,pT4: Tumor invades peripancreatic soft tissues or other adjacent organs or structures (ampulla of Vater)
-4100484,VATER,VATER association
-40402860,VATER,VATER association
 1244571,Vater,Well-differentiated neuroendocrine tumor of ampulla of Vater
 4262334,Vater|Oddi,pT1: Tumor limited to ampulla of Vater or sphincter of Oddi (ampulla of Vater)
 4241800,Vater|Oddi,T1: Tumor limited to ampulla of Vater or sphincter of Oddi
